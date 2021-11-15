@@ -6,32 +6,52 @@ const students = [
  },
  {
   name: "B",
-  image: "", 
+  image: "bla", 
   show: false
 },
 {
   name: "C",
-  image: "", 
+  image: "blabla", 
   show: false
 },
 {
   name: "D",
-  image: "", 
+  image: "blablabla", 
   show: false
 }
 ];
 
-const guessImage = document.querySelector('.guessImage');
+const guessImage = document.querySelector('#guessImageWrapper img');
 const profileImage = document.querySelector('.profileImage');
 const btns = document.querySelectorAll('.btn');
 
 let guessName;
 let guessedName;
 
+function getRandomNumber() {
+  return Math.floor(Math.random() * 3);
+}
+
+const getRandomStudent = getRandomNumber()
+const randomStudent = students[getRandomStudent];
+const imageSource = randomStudent.image;
+
+const checkStatus = (student) => {
+  if (student.show === false) {
+    guessImage.setAttribute('src', imageSource)
+  }
+}
+
+
+
+
+
   // 1. Select person that has not been shown before and show their image
   
+
   
 
+  
   
 
   //create array of students names
