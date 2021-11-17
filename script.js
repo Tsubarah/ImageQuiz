@@ -42,19 +42,29 @@ let guessedName;
 
 console.log(guessName);
 
+//Shuffle array
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array [j];
+    array[j] = temp;
+  }
+}
 
-
+shuffleArray(students);
+console.log(students);
 
   // 1. Select person that has not been shown before and show their image
   
-  const checkStatus = (studentStatus => {
-    if (studentStatus.show === false) {
-      guessImage.src = imageSource;
-      console.log(guessImage.src);
-    }
-  })
+  // const checkStatus = (studentStatus => {
+  //   if (studentStatus.show === false) {
+  //     guessImage.src = imageSource;
+  //     console.log(guessImage.src);
+  //   }
+  // })
   
-  checkStatus(randomStudent);
+  // checkStatus(randomStudent);
 
   
 
@@ -70,7 +80,7 @@ console.log(guessName);
 btns.forEach(btn => {
   btn.innerHTML = studentsNames[Math.floor(Math.random() * studentsNames.length)];
 
-  
+
   // 2. Pick random name
   // 3. Set name in data-attribute
 
