@@ -1,46 +1,8 @@
-const students = [
- {
-   name: "A",
-   image: "/images/benjamin_T.jpg",
-   show: false 
- },
- {
-  name: "B",
-  image: "bla", 
-  show: false
-},
-{
-  name: "C",
-  image: "blabla", 
-  show: false
-},
-{
-  name: "D",
-  image: "blablabla", 
-  show: false
-}
-];
 
 const guessImage = document.querySelector('#guessImageWrapper img');
-const profileImage = document.querySelector('.profileImage');
 const btns = document.querySelectorAll('.btn');
 
 
-
-
-function getRandomNumber() {
-  return Math.floor(Math.random() * 3);
-}
-
-const getRandomStudent = getRandomNumber()
-const randomStudent = students[getRandomStudent];
-const imageSource = randomStudent.image;
-
-
-let guessName = randomStudent.name;
-let guessedName;
-
-console.log(guessName);
 
 //Shuffle array
 const shuffleArray = (array) => {
@@ -52,46 +14,76 @@ const shuffleArray = (array) => {
   }
 }
 
+// Selects person that has not been shown before and show their image
 shuffleArray(students);
-console.log(students);
 
-  // 1. Select person that has not been shown before and show their image
-  
-  // const checkStatus = (studentStatus => {
-  //   if (studentStatus.show === false) {
-  //     guessImage.src = imageSource;
-  //     console.log(guessImage.src);
-  //   }
-  // })
-  
-  // checkStatus(randomStudent);
+const randomStudent = students.shift();
+const studentName = randomStudent.name;
+const studentImage = randomStudent.image;
+guessImage.src = studentImage;
+
+console.log(randomStudent);
+// console.log(randomImage);
+
+// Array that collects shown students
+const shownStudents = [];
+shownStudents.push(randomStudent);
+
+
 
   
+  
 
-  
-  
 
   //create array of students names
-  const studentsNames = students.map(student => student.name)
+const studentsNames = students.map(student => student.name)
 
-  console.log(studentsNames);
+console.log(studentsNames);
+
+
+const randomBtnNumber = Math.floor(Math.random() * btns.length);
+const randomBtn = btns[randomBtnNumber];
+
+
+
+console.log(randomBtn);
+console.log(btns);
 
 
 btns.forEach(btn => {
   btn.innerHTML = studentsNames[Math.floor(Math.random() * studentsNames.length)];
+})
+
+
+
 
 
   // 2. Pick random name
   // 3. Set name in data-attribute
 
-  btn.addEventListener('submit', e => {
-    e.preventDefault;
-  // 4. If random name is equal to image name = set green border else red border
-  // 5. Start timer (2-3 sec)
-  // 6. reset(clear everything);
-  // 7. init();
-    console.log(e.target.classList);
-  })
+  // btns.addEventListener('submit', e => {
+  //   e.preventDefault;
+  // // 4. If random name is equal to image name = set green border else red border
+  // // 5. Start timer (2-3 sec)
+  // // 6. reset(clear everything);
+  // // 7. init();
+  //   console.log(e.target.classList);
+  // });
 
-});
 
+
+
+
+// function getRandomNumber() {
+//   return Math.floor(Math.random() * 3);
+// }
+
+// const getRandomStudent = getRandomNumber()
+// const randomStudent = students[getRandomStudent];
+// const imageSource = randomStudent.image;
+
+
+// let guessName = randomStudent.name;
+// let guessedName;
+
+// console.log(guessName);
