@@ -1,6 +1,50 @@
-.buttons {
-  width: 50%;
+body, html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  background: linear-gradient(to top, rgba(255, 0, 0, 0), rgb(229 183 53 / 38%));
+}
 
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+#imageWrapper {
+  width: 80%;
+  margin: auto;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  border-radius: 200px;
+  box-shadow: 5px -1px 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 60%;
+  margin: auto;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  margin-top: 20px;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.btn-correct {
+  border: 2px solid green;
+}
+
+.btn-wrong {
+  border: 2px solid red;
 }

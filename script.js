@@ -1,7 +1,5 @@
-
-const guessImage = document.querySelector('#guessImageWrapper img');
+const guessImage = document.querySelector('#imageWrapper img');
 const btns = document.querySelectorAll('.btn');
-
 
 
 //Shuffle array
@@ -17,43 +15,69 @@ const shuffleArray = (array) => {
 // Selects person that has not been shown before and show their image
 shuffleArray(students);
 
+
 const randomStudent = students.shift();
-const studentName = randomStudent.name;
-const studentImage = randomStudent.image;
-guessImage.src = studentImage;
+guessImage.src = randomStudent.image;
+let correctBtn = btns[Math.floor(Math.random() * btns.length)];
 
-console.log(randomStudent);
-// console.log(randomImage);
-
-// Array that collects shown students
-const shownStudents = [];
-shownStudents.push(randomStudent);
+// Gets a new array with students names
+const studentsNames = students.map(student => student.name);
 
 
+// Renders page
+const reset = () => {
+  const newStudent = students.shift();
+  correctBtn = btns[Math.floor(Math.random() * btns.length)];
+  btns.forEach(button => {
+    button.innerHTML = studentsNames[Math.floor(Math.random() * studentsNames.length)];
+    button.classList.remove('btn-correct')
+    button.classList.remove('btn-wrong')
+  })
+  correctBtn.innerHTML = newStudent.name;
+  guessImage.src = newStudent.image;
+}
+
+console.log("Random student", randomStudent)
+
+
+console.log(correctBtn);
+
+const buttonNames = [];
+
+for(let i = 0; i < 4; i++) {
+  let name = studentsNames[Math.floor(Math.random() * studentsNames.length)];
+
+  if (buttonNames.includes(name)) {
+    studentsNames.filter(studentName => studentName === name)
+    name = studentsNames[Math.floor(Math.random() * studentsNames.length)];
+  }
+  buttonNames.push(name);
+}
+
+// Set random names to buttons and add click event
+
+btns.forEach((button, i) => {
+
+  button.innerHTML = buttonNames[i];
 
   
-  
-
-
-  //create array of students names
-const studentsNames = students.map(student => student.name)
-
-console.log(studentsNames);
-
-
-const randomBtnNumber = Math.floor(Math.random() * btns.length);
-const randomBtn = btns[randomBtnNumber];
-
-
-
-console.log(randomBtn);
-console.log(btns);
-
-
-btns.forEach(btn => {
-  btn.innerHTML = studentsNames[Math.floor(Math.random() * studentsNames.length)];
+  button.addEventListener('click', e => {
+    if (e.target === correctBtn) {
+      button.classList.add('btn-correct');
+      console.log("You clicked the correct button");
+    } else {
+      correctBtn.classList.add('btn-correct');
+      button.classList.add('btn-wrong');
+      console.log("wrong button");
+    }
+    setTimeout(() => {
+      reset();
+    }, 3000)
+    
+  }) 
 })
 
+correctBtn.innerHTML = randomStudent.name;
 
 
 
@@ -69,21 +93,3 @@ btns.forEach(btn => {
   // // 7. init();
   //   console.log(e.target.classList);
   // });
-
-
-
-
-
-// function getRandomNumber() {
-//   return Math.floor(Math.random() * 3);
-// }
-
-// const getRandomStudent = getRandomNumber()
-// const randomStudent = students[getRandomStudent];
-// const imageSource = randomStudent.image;
-
-
-// let guessName = randomStudent.name;
-// let guessedName;
-
-// console.log(guessName);
