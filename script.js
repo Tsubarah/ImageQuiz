@@ -2,6 +2,8 @@ const guessImage = document.querySelector('#imageWrapper img');
 const btns = document.querySelectorAll('.btn');
 
 
+
+
 //Shuffle array
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -14,15 +16,18 @@ const shuffleArray = (array) => {
 
 // Selects person that has not been shown before and show their image
 shuffleArray(students);
-
-
+const studentsNames = students.map(student => student.name);
 const randomStudent = students.shift();
+// Gets a new array with students names
+// Array for shown names
+const buttonNames = [];
 guessImage.src = randomStudent.image;
+let correctAnswer = 0;
+let guesses = 0;
 let correctBtn = btns[Math.floor(Math.random() * btns.length)];
 
-// Gets a new array with students names
-const studentsNames = students.map(student => student.name);
 
+// Function to prevent any clicks
 const preventClicks = () => {
   btns.forEach(button => {
     button.style.pointerEvents = "none";
@@ -43,13 +48,7 @@ const reset = () => {
   guessImage.src = newStudent.image;
 }
 
-console.log("Random student", randomStudent)
-
-
-console.log(correctBtn);
-
-const buttonNames = [];
-
+// checks if name has been shown, if true name gets pushed to buttonNames array
 for(let i = 0; i < 4; i++) {
   let name = studentsNames[Math.floor(Math.random() * studentsNames.length)];
 
@@ -61,19 +60,23 @@ for(let i = 0; i < 4; i++) {
 }
 
 // Set random names to buttons and add click event
-
 btns.forEach((button, i) => {
 
   button.innerHTML = buttonNames[i];
 
-  
   button.addEventListener('click', e => {
     if (e.target === correctBtn) {
+      correctAnswer++;
+      guesses++;
       button.classList.add('btn-correct');
+      console.log("correct answer:", correctAnswer);
+      console.log("Guesses", guesses)
       console.log("You clicked the correct button");
     } else {
+      guesses++;
       correctBtn.classList.add('btn-correct');
       button.classList.add('btn-wrong');
+      console.log("guesses:", guesses);
       console.log("wrong button");
     }
     preventClicks();
