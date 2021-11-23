@@ -23,8 +23,13 @@ let correctBtn = btns[Math.floor(Math.random() * btns.length)];
 // Gets a new array with students names
 const studentsNames = students.map(student => student.name);
 
+const preventClicks = () => {
+  btns.forEach(button => {
+    button.style.pointerEvents = "none";
+  })
+}
 
-// Renders page
+// Resets page
 const reset = () => {
   const newStudent = students.shift();
   correctBtn = btns[Math.floor(Math.random() * btns.length)];
@@ -32,6 +37,7 @@ const reset = () => {
     button.innerHTML = studentsNames[Math.floor(Math.random() * studentsNames.length)];
     button.classList.remove('btn-correct')
     button.classList.remove('btn-wrong')
+    button.style.pointerEvents = "auto";
   })
   correctBtn.innerHTML = newStudent.name;
   guessImage.src = newStudent.image;
@@ -70,26 +76,12 @@ btns.forEach((button, i) => {
       button.classList.add('btn-wrong');
       console.log("wrong button");
     }
+    preventClicks();
     setTimeout(() => {
       reset();
-    }, 3000)
+    }, 1000)
     
   }) 
 })
 
 correctBtn.innerHTML = randomStudent.name;
-
-
-
-
-  // 2. Pick random name
-  // 3. Set name in data-attribute
-
-  // btns.addEventListener('submit', e => {
-  //   e.preventDefault;
-  // // 4. If random name is equal to image name = set green border else red border
-  // // 5. Start timer (2-3 sec)
-  // // 6. reset(clear everything);
-  // // 7. init();
-  //   console.log(e.target.classList);
-  // });
