@@ -35,12 +35,12 @@ img {
   justify-content: left;
   margin-left: 20px;
   font-weight: bold;
+  position: absolute;
 }
 
 .toggleScore {
   display: none;
 }
-
 
 .buttons {
   display: flex;

@@ -50,7 +50,7 @@ const reset = () => {
   score.innerHTML = `${correctAnswer} / ${studentsNames.length}`;
 }
 
-
+// Result button that can be toggled
 resultBtn.addEventListener('click', () => {
   const score = document.querySelector('#score')
   
@@ -58,12 +58,10 @@ resultBtn.addEventListener('click', () => {
     score.classList.toggle('toggleScore');
   }
   displayScore()
-  
   score.innerHTML = `${correctAnswer} / ${studentsNames.length}`;
 });
 
 
-// score.innerHTML = `${correctAnswer} / ${studentsNames.length}`;
 // checks if name has been shown, if true name gets pushed to buttonNames array
 for(let i = 0; i < 4; i++) {
   let name = studentsNames[Math.floor(Math.random() * studentsNames.length)];
@@ -74,14 +72,11 @@ for(let i = 0; i < 4; i++) {
   }
   buttonNames.push(name);
 }
-// document.querySelector('.remainingStudents').innerHTML = `<div>Remaining students to guess ${guesses}</div>`
-
 
 // Set random names to buttons and add click event
 btns.forEach((button, i) => {
 
   button.innerHTML = buttonNames[i];
-
 
   button.addEventListener('click', e => {
     if (e.target === correctBtn) {
@@ -102,6 +97,5 @@ btns.forEach((button, i) => {
     
   }) 
 })
-
 
 correctBtn.innerHTML = randomStudent.name;
