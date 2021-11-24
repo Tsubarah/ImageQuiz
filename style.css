@@ -4,17 +4,11 @@ body, html {
   height: 100%;
   display: flex;
   justify-content: center;
-  background: linear-gradient(to top, rgba(255, 0, 0, 0), rgb(229 183 53 / 38%));
 }
 
 h1 {
   display: flex;
   justify-content: center;
-}
-
-#imageWrapper {
-  width: 80%;
-  margin: auto;
 }
 
 img {
@@ -23,6 +17,30 @@ img {
   border-radius: 200px;
   box-shadow: 5px -1px 20px;
 }
+
+#imageWrapper {
+  width: 80%;
+  margin: auto;
+}
+
+.resultBtn {
+  height: 30px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#score {
+  font-size: 25px;
+  color: green;
+  justify-content: left;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+.toggleScore {
+  display: none;
+}
+
 
 .buttons {
   display: flex;
@@ -47,4 +65,11 @@ img {
 
 .btn-wrong {
   border: 4px solid red;
+}
+
+.remainingStudents {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  font-weight: bold;
 }
