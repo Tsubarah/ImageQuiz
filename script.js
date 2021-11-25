@@ -3,6 +3,7 @@ const btns = document.querySelectorAll('.btn');
 const resultBtn = document.querySelector('.resultBtn');
 const startQuiz = document.querySelector('.startQuiz');
 
+const initialStudents = students;
 
 
 //Shuffle array
@@ -15,18 +16,22 @@ const shuffleArray = (array) => {
   }
 }
 
+function playAgain() {
+
+}
+
 // Selects person that has not been shown before and show their image
-shuffleArray(students);
+shuffleArray(initialStudents);
 // Gets a new array with students names
-const studentsNames = students.map(student => student.name);
-const randomStudent = students.shift();
+const studentsNames = initialStudents.map(student => student.name);
+const randomStudent = initialStudents.shift();
 // Array for shown names
 const buttonNames = [];
 
 
 guessImage.src = randomStudent.image;
 let correctAnswer = 0;
-let guesses = students.length;
+let guesses = initialStudents.length;
 let correctBtn = btns[Math.floor(Math.random() * btns.length)];
 
 
@@ -39,7 +44,7 @@ const preventClicks = () => {
 
 // Resets page
 const reset = () => {
-  const newStudent = students.shift();
+  const newStudent = initialStudents.shift();
   correctBtn = btns[Math.floor(Math.random() * btns.length)];
   btns.forEach(button => {
     button.innerHTML = studentsNames[Math.floor(Math.random() * studentsNames.length)];
@@ -83,6 +88,7 @@ for(let i = 0; i < 4; i++) {
   }
   buttonNames.push(name);
 }
+console.log(buttonNames)
 
 // Set random names to buttons and add click event
 btns.forEach((button, i) => {
@@ -108,5 +114,6 @@ btns.forEach((button, i) => {
     
   }) 
 })
+
 
 correctBtn.innerHTML = randomStudent.name;
