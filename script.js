@@ -1,6 +1,8 @@
 const guessImage = document.querySelector('#imageWrapper img');
 const btns = document.querySelectorAll('.btn');
 const resultBtn = document.querySelector('.resultBtn');
+const startQuiz = document.querySelector('.startQuiz');
+
 
 
 //Shuffle array
@@ -61,6 +63,15 @@ resultBtn.addEventListener('click', () => {
   score.innerHTML = `${correctAnswer} / ${studentsNames.length}`;
 });
 
+
+startQuiz.addEventListener('click', e => {
+  const quizContainer = document.querySelector('.quizContainer');
+  
+  if (e.target === startQuiz) {
+    startQuiz.classList.add('show');
+    quizContainer.classList.remove('show');
+  }
+})
 
 // checks if name has been shown, if true name gets pushed to buttonNames array
 for(let i = 0; i < 4; i++) {

@@ -4,6 +4,7 @@ body, html {
   height: 100%;
   display: flex;
   justify-content: center;
+  font-family: 'Libre Baskerville', serif;
 }
 
 h1 {
@@ -42,12 +43,25 @@ img {
   display: none;
 }
 
+.show {
+  display: none;
+}
+
 .buttons {
   display: flex;
   flex-direction: column;
   text-align: center;
   width: 60%;
   margin: auto;
+}
+
+.startQuiz {
+  margin-top: 150%;
+  width: 200px;
+  height: 40px;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
 }
 
 .btn {
