@@ -83,7 +83,6 @@ for(let i = 0; i < 4; i++) {
   let name = studentsNames[Math.floor(Math.random() * studentsNames.length)];
 
   if (buttonNames.includes(name)) {
-    studentsNames.filter(studentName => studentName === name)
     name = studentsNames[Math.floor(Math.random() * studentsNames.length)];
   }
   buttonNames.push(name);
