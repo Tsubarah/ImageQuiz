@@ -1,9 +1,11 @@
 const guessImage = document.querySelector('#imageWrapper img');
 const btns = document.querySelectorAll('.btn');
-const resultBtn = document.querySelector('.resultBtn');
-const startQuiz = document.querySelector('.startQuiz');
+const resultBtn = document.querySelector('#resultBtn');
+const startQuiz = document.querySelector('#startQuiz');
+const quizContainer = document.querySelector('.quizContainer');
+const score = document.querySelector('#score')
 
-const initialStudents = students;
+const initialStudents = [...students];
 
 
 //Shuffle array
@@ -16,23 +18,41 @@ const shuffleArray = (array) => {
   }
 }
 
-function playAgain() {
-
-}
-
-// Selects person that has not been shown before and show their image
 shuffleArray(initialStudents);
+
 // Gets a new array with students names
 const studentsNames = initialStudents.map(student => student.name);
-const randomStudent = initialStudents.shift();
-// Array for shown names
-const buttonNames = [];
-
+let randomStudents = initialStudents.slice(0, 4);
+let randomNumber = [Math.floor(Math.random() * 3)];
+let randomStudent = randomStudents[randomNumber];
+let correctAnswer = 0;
+let guesses = 0;
+let maxGuesses = 10;
 
 guessImage.src = randomStudent.image;
-let correctAnswer = 0;
-let guesses = initialStudents.length;
-let correctBtn = btns[Math.floor(Math.random() * btns.length)];
+
+
+
+const restartGame = () => {
+    const restartQuiz = document.querySelector('#restartQuiz')
+    const finalResult = document.querySelector('#finalResult')
+    
+    quizContainer.classList.add('hidden');
+    restartQuiz.classList.remove('hidden');
+    finalResult.classList.remove('hidden');
+    finalResult.innerHTML = `You scored ${correctAnswer} / ${maxGuesses} !`
+
+    restartQuiz.addEventListener('click', e => {
+      if (e.target.innerText === "Play again!") {
+        restartQuiz.classList.add('hidden');
+        finalResult.classList.add('hidden');
+        quizContainer.classList.remove('hidden');
+        correctAnswer = 0;
+        guesses = 0;
+        reset()
+      }
+    })
+}
 
 
 // Function to prevent any clicks
@@ -42,77 +62,80 @@ const preventClicks = () => {
   })
 }
 
+startQuiz.addEventListener('click', e => {
+  
+  if (e.target === startQuiz) {
+    startQuiz.classList.add('hidden');
+    quizContainer.classList.remove('hidden');
+  }
+})
+
+const getRandomStudent = () => {
+  randomStudents = initialStudents.slice(0, 4);
+  randomNumber = [Math.floor(Math.random() * 3)];
+  randomStudent = randomStudents[randomNumber];
+}
+
+
 // Resets page
 const reset = () => {
-  const newStudent = initialStudents.shift();
-  correctBtn = btns[Math.floor(Math.random() * btns.length)];
-  btns.forEach(button => {
-    button.innerHTML = studentsNames[Math.floor(Math.random() * studentsNames.length)];
-    button.classList.remove('btn-correct')
-    button.classList.remove('btn-wrong')
+  shuffleArray(initialStudents)
+  getRandomStudent();
+
+  btns.forEach((button, i) => {
+    button.classList.remove('btn-correct');
+    button.classList.remove('btn-wrong');
     button.style.pointerEvents = "auto";
+
+    button.innerHTML = randomStudents[i].name;
   })
-  correctBtn.innerHTML = newStudent.name;
-  guessImage.src = newStudent.image;
-  score.innerHTML = `${correctAnswer} / ${studentsNames.length}`;
+  
+  guessImage.src = randomStudent.image;
+  score.innerHTML = `${correctAnswer} / ${maxGuesses}`;
+  if (guesses === maxGuesses) {
+    restartGame();
+  } 
 }
+
+
+const displayScore = () => {
+  score.classList.toggle('toggleScore');
+}
+
 
 // Result button that can be toggled
 resultBtn.addEventListener('click', () => {
-  const score = document.querySelector('#score')
-  
-  function displayScore() {
-    score.classList.toggle('toggleScore');
-  }
-  displayScore()
-  score.innerHTML = `${correctAnswer} / ${studentsNames.length}`;
+  displayScore();
+  score.innerHTML = `${correctAnswer} / ${maxGuesses}`;
 });
 
 
-startQuiz.addEventListener('click', e => {
-  const quizContainer = document.querySelector('.quizContainer');
-  
-  if (e.target === startQuiz) {
-    startQuiz.classList.add('show');
-    quizContainer.classList.remove('show');
-  }
-})
-
-// checks if name has been shown, if true name gets pushed to buttonNames array
-for(let i = 0; i < 4; i++) {
-  let name = studentsNames[Math.floor(Math.random() * studentsNames.length)];
-
-  if (buttonNames.includes(name)) {
-    name = studentsNames[Math.floor(Math.random() * studentsNames.length)];
-  }
-  buttonNames.push(name);
-}
-console.log(buttonNames)
-
 // Set random names to buttons and add click event
-btns.forEach((button, i) => {
+  btns.forEach((button, i) => {
+    button.classList.remove('btn-correct');
+    button.classList.remove('btn-wrong');
+    button.style.pointerEvents = "auto";
 
-  button.innerHTML = buttonNames[i];
+    button.innerHTML = randomStudents[i].name;
 
-  button.addEventListener('click', e => {
-    if (e.target === correctBtn) {
-      correctAnswer++;
-      button.classList.add('btn-correct');
-      console.log("correct answer:", correctAnswer);
-      console.log("You clicked the correct button");
-    } else {
-      correctBtn.classList.add('btn-correct');
-      button.classList.add('btn-wrong');
-      console.log("guesses:", guesses);
-      console.log("wrong button");
-    }
-    preventClicks();
-    setTimeout(() => {
-      reset();
-    }, 1000)
-    
-  }) 
-})
-
-
-correctBtn.innerHTML = randomStudent.name;
+    button.addEventListener('click', e => {
+      if (e.target.innerText === randomStudent.name) {
+        correctAnswer++;
+        guesses++;
+        button.classList.add('btn-correct');
+        console.log("correct answer:", correctAnswer);
+        console.log("You clicked the correct button");
+      } else {
+        guesses++;
+        button.classList.add('btn-correct');
+        button.classList.add('btn-wrong');
+        console.log("guesses:", guesses);
+        console.log("wrong button");
+      }
+      
+      preventClicks();
+      setTimeout(() => {
+        reset();
+      }, 1000);
+    });
+  });

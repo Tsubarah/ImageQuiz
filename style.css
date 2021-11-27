@@ -4,6 +4,7 @@ body, html {
   height: 100%;
   display: flex;
   justify-content: center;
+  background-color:#d3d3d3;
   font-family: 'Libre Baskerville', serif;
 }
 
@@ -19,16 +20,30 @@ img {
   box-shadow: 5px -1px 20px;
 }
 
+#quizWrapper {
+  position: relative;
+  margin-top: 150%;
+  display: flex;
+  justify-content: center;
+}
+
 #imageWrapper {
   width: 80%;
   margin: auto;
 }
 
-.resultBtn {
+#resultBtn {
   height: 30px;
   margin-top: 10px;
   margin-left: 10px;
+  border-radius: 8px;
 }
+
+#finalResult {
+  margin-top: 20px;
+  text-align: center;
+}
+
 
 #score {
   font-size: 25px;
@@ -43,11 +58,11 @@ img {
   display: none;
 }
 
-.show {
+.hidden {
   display: none;
 }
 
-.buttons {
+#buttons {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -55,13 +70,28 @@ img {
   margin: auto;
 }
 
-.startQuiz {
+#startQuiz {
+  position: relative;
   margin-top: 150%;
   width: 200px;
   height: 40px;
   justify-content: center;
   text-align: center;
   font-weight: bold;
+  border-radius: 8px;
+}
+
+#restartQuiz {
+  position: relative;
+  justify-content: center;
+  margin-top: 150%;
+  width: 200px;
+  height: 40px;
+  background-color: green;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 8px;
 }
 
 .btn {
@@ -81,9 +111,33 @@ img {
   border: 4px solid red;
 }
 
-.remainingStudents {
-  display: flex;
-  justify-content: center;
-  padding: 30px;
-  font-weight: bold;
+
+@media only screen and (min-width: 520px) {
+  #buttons {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  img {
+    border-radius: 250px;
+  }
+
+  #resultBtn {
+    height: 40px;
+    width: 100px;
+    font-weight: bold;
+  }
+
+  .btn {
+    height: 40px;
+    width: 40%;
+    font-weight: bold;
+  }
+
+  #finalResult {
+    font-size: 20px;
+    font-weight: bold;
+  }
 }

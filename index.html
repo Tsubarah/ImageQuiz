@@ -12,24 +12,30 @@
 </head>
 <body>
   <main>
-      <button class="startQuiz">Start quiz</button>
-    <div class="quizContainer show">
-      <button class="resultBtn">Show result</button>
-      <div id="score" class="toggleScore"></div>
-      <h1>WHO`S THIS?</h1>
-      <div id="imageWrapper">
-        <img src="" alt="">
+    <div class="quizWrapper">
+      <button id="startQuiz">Start Quiz</button>
+      
+      <button id="restartQuiz" class="hidden">Play again!</button>
+      
+      <div id="finalResult"></div>
+      
+      <div class="quizContainer hidden">
+        <button id="resultBtn">Show result</button>
+        <div id="score" class="toggleScore"></div>
+        <h1>WHO`S THIS?</h1>
+        <div id="imageWrapper">
+          <img src="" alt="">
+        </div>
+
+        <div id="buttons">
+          <button class="btn"></button>
+          <button class="btn"></button>
+          <button class="btn"></button>
+          <button class="btn"></button>
+        </div>    
+        <div class="score"></div> 
       </div>
-      <div class="buttons">
-        <button class="btn">Name A</button>
-        <button class="btn">Name B</button>
-        <button class="btn">Name C</button>
-        <button class="btn">Name D</button>
-      </div>    
-      <div class="remainingStudents"></div>
-      <div class="score"></div> 
     </div>
-     
   </main>
   <script src="students.js"></script>
   <script src="script.js"></script>
