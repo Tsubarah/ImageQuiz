@@ -1,9 +1,9 @@
-const guessImage = document.querySelector('#imageWrapper img');
+const guessImage = document.querySelector('.imageWrapper img');
 const btns = document.querySelectorAll('.btn');
-const resultBtn = document.querySelector('#resultBtn');
-const startQuiz = document.querySelector('#startQuiz');
+const resultBtn = document.querySelector('.resultBtn');
+const startQuiz = document.querySelector('.startQuiz');
 const quizContainer = document.querySelector('.quizContainer');
-const score = document.querySelector('#score')
+const score = document.querySelector('.score')
 
 const initialStudents = [...students];
 
@@ -34,8 +34,8 @@ guessImage.src = randomStudent.image;
 
 
 const restartGame = () => {
-    const restartQuiz = document.querySelector('#restartQuiz')
-    const finalResult = document.querySelector('#finalResult')
+    const restartQuiz = document.querySelector('.restartQuiz')
+    const finalResult = document.querySelector('.finalResult')
     
     quizContainer.classList.add('hidden');
     restartQuiz.classList.remove('hidden');
@@ -85,7 +85,12 @@ const reset = () => {
   btns.forEach((button, i) => {
     button.classList.remove('btn-correct');
     button.classList.remove('btn-wrong');
+    button.removeAttribute('data-correct');
     button.style.pointerEvents = "auto";
+
+    if (randomStudents[i].name === randomStudent.name) {
+      button.setAttribute('data-correct', 'true');
+    }
 
     button.innerHTML = randomStudents[i].name;
   })
@@ -112,25 +117,23 @@ resultBtn.addEventListener('click', () => {
 
 // Set random names to buttons and add click event
   btns.forEach((button, i) => {
-    button.classList.remove('btn-correct');
-    button.classList.remove('btn-wrong');
-    button.style.pointerEvents = "auto";
 
     button.innerHTML = randomStudents[i].name;
+    if (randomStudents[i].name === randomStudent.name) {
+      button.setAttribute('data-correct', 'true');
+    }
 
     button.addEventListener('click', e => {
+      const correctBtn = document.querySelector("[data-correct='true']");
+  
       if (e.target.innerText === randomStudent.name) {
         correctAnswer++;
         guesses++;
         button.classList.add('btn-correct');
-        console.log("correct answer:", correctAnswer);
-        console.log("You clicked the correct button");
       } else {
         guesses++;
-        button.classList.add('btn-correct');
         button.classList.add('btn-wrong');
-        console.log("guesses:", guesses);
-        console.log("wrong button");
+        correctBtn.classList.add('btn-correct');
       }
       
       preventClicks();
